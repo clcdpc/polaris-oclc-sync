@@ -22,9 +22,10 @@ This script is intended to be run as an automated job, typically using a SQL Ser
 1.  **Windows Server:** A server with PowerShell 5.1 or higher.
 2.  **Polaris SQL Server Access:** Read access to the Polaris database. The script uses Windows Authentication to connect.
 3.  **WinSCP:** The `WinSCPnet.dll` assembly is required for SFTP functionality. You can download it from the [WinSCP website](https://winscp.net/eng/downloads.php). Place the `.dll` in the path specified by the `$WinSCPPath` parameter (defaults to `<BasePath>\WinSCPnet.dll`).
-4.  Good OCLC numbers in your Polaris MARC records. This process does a CSV match with OCLC.
-5.  An approved non-MARC Sync Collection for MARC & non-MARC data. Check with OCLC support as needed.
-6.  OCLC file transfer credentials which you must obtain from OCLC.
+4.  **Good OCLC numbers in your Polaris MARC records**. This process does a CSV match with OCLC.
+5.  An approved non-MARC Sync Collection both ADDING and DELETING holdings. Check with OCLC support as needed.
+6.  OCLC file transfer credentials which you must obtain from OCLC support and are different from your WorldShare Collection Manager login.
+7.  Although the SQL scripts will delete holdsings if all item records are in these statuses: 7=Lost, 8=Claim Returned, 9=Claim Never Had, 10=Missing, 11=Withdrawn, 16=Unavailable, 20=Does Not Circulate, 21=Claim Missing Parts, **it is recommended that you enable the Polaris feature to RETAIN deleted item records**. The SQL script will also look for deleted item record statuses and using deleted item records means you don't have to be as careful with your timing remembering to run the script while items are in a Withdrawn status before deleting the record entirely.
 
 ## Configuration
 
