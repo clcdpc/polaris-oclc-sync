@@ -3,10 +3,9 @@
 ## Overview
 
 This PowerShell script is designed to automate the process of synchronizing library holdings from a Polaris SQL database with OCLC's WorldCat. It queries the Polaris database for newly added or deleted bibliographic records, formats the data into CSV files, and securely uploads them to OCLC's SFTP server for processing by WorldShare Collection Manager.
-
 This script is intended to be run as an automated job, typically using a SQL Server Agent.
 
-**Compatibility:** This script has been tested with **Polaris ILS version 7.8**.
+**Compatibility:** This script has been tested with **Polaris ILS version 7.8**. 
 
 ## Features
 
@@ -16,12 +15,16 @@ This script is intended to be run as an automated job, typically using a SQL Ser
 - **Secure SFTP Upload:** Uses WinSCP .NET assembly to upload the generated CSV files to OCLC's SFTP server.
 - **Robust Logging:** Creates daily log files and provides different log levels for clear monitoring and troubleshooting.
 - **Retry Logic:** Includes built-in retry logic for SFTP uploads to handle transient network issues.
+- **Consortium Support:** It is designed to work in a consortium enviornment where each member library has their own OCLC Metadata Collection/Account.
 
 ## Prerequisites
 
 1.  **Windows Server:** A server with PowerShell 5.1 or higher.
 2.  **Polaris SQL Server Access:** Read access to the Polaris database. The script uses Windows Authentication to connect.
 3.  **WinSCP:** The `WinSCPnet.dll` assembly is required for SFTP functionality. You can download it from the [WinSCP website](https://winscp.net/eng/downloads.php). Place the `.dll` in the path specified by the `$WinSCPPath` parameter (defaults to `<BasePath>\\WinSCPnet.dll`).
+4.  Good OCLC numbers in your Polaris MARC records. This process does a CSV match with OCLC.
+5.  An approved non-MARC Sync Collection for MARC & non-MARC data. Check with OCLC support as needed.
+6.  OCLC file transfer credentials which you must obtain from OCLC.
 
 ## Configuration
 
@@ -70,10 +73,10 @@ To automate the script, you can schedule it as a job in the SQL Server Agent.
     *   **Command:** Enter the command to execute the script.
         ```powershell
         # Example: Run with default settings
-        C:\\path\\to\\your\\scripts\\oclc-sync.ps1
+        C:\path\to\your\scripts\oclc-sync.ps1
 
         # Example: Override the BasePath
-        C:\\path\\to\\your\\scripts\\oclc-sync.ps1 -BasePath "D:\\OCLC_Sync"
+        C:\path\to\your\scripts\oclc-sync.ps1 -BasePath "D:\\OCLC_Sync"
         ```
 5.  **Schedules Tab:**
     *   Click **New...** to create a schedule.
