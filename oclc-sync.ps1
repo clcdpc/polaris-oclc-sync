@@ -1,16 +1,20 @@
 [CmdletBinding()]
 param (
+    # The base path for all operational files.
+    [Parameter(Mandatory = $false)]
+    [string]$BasePath = "c:\ProgramData\clc_oclc_sync",
+
     # The full path to your JSON settings file.
     [Parameter(Mandatory = $false)]
-    [string]$SettingsFilePath = "c:\ProgramData\clc_oclc_sync\settings.json",
+    [string]$SettingsFilePath,
 
     # The full path to your SQL query file for ADDING records to OCLC.
     [Parameter(Mandatory = $false)]
-    [string]$SqlFilePathAdd = "c:\ProgramData\clc_oclc_sync\NewOCLCRecords.sql",
+    [string]$SqlFilePathAdd,
 
     # The full path to your SQL query file for DELETING records from OCLC.
     [Parameter(Mandatory = $false)]
-    [string]$SqlFilePathDelete = "c:\ProgramData\clc_oclc_sync\DeleteOCLCRecords.sql",
+    [string]$SqlFilePathDelete,
 
     # The reference date for the query.
     # For ADD operations, records created on or after this date.
@@ -29,11 +33,11 @@ param (
 
     # The directory where CSV files will be saved.
     [Parameter(Mandatory = $false)]
-    [string]$OutputPath = "c:\ProgramData\clc_oclc_sync\output",
+    [string]$OutputPath,
 
     # Full path to WinSCPnet.dll. Example: "C:\Program Files (x86)\WinSCP\WinSCPnet.dll"
     [Parameter(Mandatory = $false)]
-    [string]$WinSCPPath = (Join-Path "c:\ProgramData\clc_oclc_sync" "WinSCPnet.dll"), 
+    [string]$WinSCPPath,
 
     # Switch to enable SFTP upload. If not present, upload is skipped.
     [Parameter(Mandatory = $false)]
@@ -50,7 +54,7 @@ param (
 
     # The directory where daily log files will be created. Defaults to the ".\logs" directory in the script's location.
     [Parameter(Mandatory = $false)]
-    [string]$LogDirectory = (Join-Path "c:\ProgramData\clc_oclc_sync" "logs"),
+    [string]$LogDirectory,
 
     # Switch to enable logging of generated SQL queries. If not present, this is skipped.
     [Parameter(Mandatory = $false)]
@@ -60,6 +64,28 @@ param (
     [Parameter(Mandatory = $false)]
     [switch]$EnableRawSqlDataLogging
 )
+
+# --- Path Initializations ---
+# If specific paths are not provided, construct them from the BasePath.
+if (-not $PSBoundParameters.ContainsKey('SettingsFilePath')) {
+    $SettingsFilePath = Join-Path $BasePath "settings.json"
+}
+if (-not $PSBoundParameters.ContainsKey('SqlFilePathAdd')) {
+    $SqlFilePathAdd = Join-Path $BasePath "NewOCLCRecords.sql"
+}
+if (-not $PSBoundParameters.ContainsKey('SqlFilePathDelete')) {
+    $SqlFilePathDelete = Join-Path $BasePath "DeleteOCLCRecords.sql"
+}
+if (-not $PSBoundParameters.ContainsKey('OutputPath')) {
+    $OutputPath = Join-Path $BasePath "output"
+}
+if (-not $PSBoundParameters.ContainsKey('WinSCPPath')) {
+    $WinSCPPath = Join-Path $BasePath "WinSCPnet.dll"
+}
+if (-not $PSBoundParameters.ContainsKey('LogDirectory')) {
+    $LogDirectory = Join-Path $BasePath "logs"
+}
+
 
 # --- Error Collection Setup ---
 # Initialize a global, thread-safe list to hold all error messages for a final summary.
