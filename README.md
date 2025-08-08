@@ -21,7 +21,7 @@ This script is intended to be run as an automated job, typically using a SQL Ser
 
 1.  **Windows Server:** A server with PowerShell 5.1 or higher.
 2.  **Polaris SQL Server Access:** Read access to the Polaris database. The script uses Windows Authentication to connect.
-3.  **WinSCP:** The `WinSCPnet.dll` assembly is required for SFTP functionality. You can download it from the [WinSCP website](https://winscp.net/eng/downloads.php). Place the `.dll` in the path specified by the `$WinSCPPath` parameter (defaults to `<BasePath>\\WinSCPnet.dll`).
+3.  **WinSCP:** The `WinSCPnet.dll` assembly is required for SFTP functionality. You can download it from the [WinSCP website](https://winscp.net/eng/downloads.php). Place the `.dll` in the path specified by the `$WinSCPPath` parameter (defaults to `<BasePath>\WinSCPnet.dll`).
 4.  Good OCLC numbers in your Polaris MARC records. This process does a CSV match with OCLC.
 5.  An approved non-MARC Sync Collection for MARC & non-MARC data. Check with OCLC support as needed.
 6.  OCLC file transfer credentials which you must obtain from OCLC.
@@ -30,11 +30,11 @@ This script is intended to be run as an automated job, typically using a SQL Ser
 
 ### Script Parameters
 
-The script's behavior is controlled by parameters. The most important one is `$BasePath`, which defaults to `c:\\ProgramData\\clc_oclc_sync`. All other file paths are derived from this base path unless explicitly overridden.
+The script's behavior is controlled by parameters. The most important one is `$BasePath`, which defaults to `c:\ProgramData\clc_oclc_sync`. All other file paths are derived from this base path unless explicitly overridden.
 
 ### `settings.json` File
 
-This is the main configuration file, located by default at `<BasePath>\\settings.json`. It contains a JSON array of objects, where each object represents an organization or library to be processed.
+This is the main configuration file, located by default at `<BasePath>\settings.json`. It contains a JSON array of objects, where each object represents an organization or library to be processed.
 
 **Example `settings.json`:**
 ```json
