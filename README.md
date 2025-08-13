@@ -47,8 +47,8 @@ This is the main configuration file, located by default at `<BasePath>\settings.
     "SftpUsername": "sftp_user_springfield",
     "SftpPassword": "secure_password_1",
     "SftpRemoteDirectory": "/oclc/uploads/springfield",
-    "CollectionIDOCLCAdd": "springfield.add",
-    "CollectionIDOCLCDel": "springfield.delete"
+    "CollectionIDOCLCAdd": "123456789",
+    "CollectionIDOCLCDel": "987654321"
   }
 ]
 ```
@@ -77,7 +77,7 @@ To automate the script, you can schedule it as a job in the SQL Server Agent.
         C:\path\to\your\scripts\oclc-sync.ps1
 
         # Example: Override the BasePath
-        C:\path\to\your\scripts\oclc-sync.ps1 -BasePath "D:\\OCLC_Sync"
+        C:\path\to\your\scripts\oclc-sync.ps1 -BasePath "D:\OCLC_Sync"
         ```
 5.  **Schedules Tab:**
     *   Click **New...** to create a schedule.
