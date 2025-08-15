@@ -312,10 +312,9 @@ Function Process-OclcOperation {
                 if ($sftpSuccess) {
                     Write-Log -Level INFO -Message "      SUCCESS: SFTP upload for '$csvFileName' completed successfully."
                 } else {
-                    # --- MODIFIED BEHAVIOR ---
-                    # The final failure after all retries is now logged as a WARNING.
-                    # This ensures the script continues without flagging a critical error.
-                    Write-Log -Level WARN -Message "      SFTP FAILURE: Upload for '$csvFileName' did not succeed after all $maxRetries attempts."
+                    # The final failure after all retries is logged as a critical ERROR.
+                    # This ensures the script stops and flags a critical error.
+                    Write-Log -Level ERROR -Message "      SFTP CRITICAL FAILURE: Upload for '$csvFileName' did not succeed after all $maxRetries attempts."
                 }
             } else {
                 Write-Log -Level INFO -Message "      SFTP: Skipping upload for Org: $orgName as no records were exported."
