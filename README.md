@@ -16,6 +16,7 @@ This script is intended to be run as an automated job, typically using a SQL Ser
 - **Robust Logging:** Creates daily log files and provides different log levels for clear monitoring and troubleshooting.
 - **Retry Logic:** Includes built-in retry logic for SFTP uploads to handle transient network issues.
 - **Consortium Support:** It is designed to work in a consortium enviornment where each member library has their own OCLC Metadata Collection/Account.
+  - When you are starting the intial syncs, the script supports passing a parameter where only ONE of the orgs in the settings.json will be run. This allows you to for example rollout the sync process gradually and have some members doing a daily sync alongside those you're doing an intial sync with.
 
 ## Prerequisites
 
