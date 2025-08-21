@@ -4,6 +4,10 @@ param (
     [Parameter(Mandatory = $false)]
     [string]$BasePath = "c:\ProgramData\clc_oclc_sync",
 
+    # The organization ID to process. If not provided, all organizations will be processed.
+    [Parameter(Mandatory = $false)]
+    [string]$OrganizationID,
+
     # The full path to your JSON settings file.
     [Parameter(Mandatory = $false)]
     [string]$SettingsFilePath,
@@ -409,6 +413,17 @@ catch {
 if ($null -eq $orgSettings -or $orgSettings.Count -eq 0) {
     Write-Log -Level WARN -Message "No settings found in the JSON file or the file is empty. Exiting."
     return
+}
+
+# --- ADDED: Filter for a specific Organization ID if provided ---
+if (-not [string]::IsNullOrEmpty($OrganizationID)) {
+    Write-Log -Level INFO -Message "Parameter -OrganizationID specified. Filtering for Org ID: $OrganizationID"
+    $orgSettings = $orgSettings | Where-Object { $_.OrganizationID -eq $OrganizationID }
+
+    if ($null -eq $orgSettings -or $orgSettings.Count -eq 0) {
+        Write-Log -Level WARN -Message "No organization with ID '$OrganizationID' found in the settings file. Exiting."
+        return
+    }
 }
 
 $scriptParameters = @{
