@@ -26,7 +26,7 @@ This script is intended to be run as an automated job, typically using a SQL Ser
 4.  **Good OCLC numbers in your Polaris MARC records**. This process does a CSV match with OCLC.
 5.  An approved non-MARC Sync Collection both ADDING and DELETING holdings. Check with OCLC support as needed.
 6.  OCLC file transfer credentials which you must obtain from OCLC support and are different from your WorldShare Collection Manager login.
-7.  Although the SQL scripts will delete holdsings if all item records are in these statuses: 7=Lost, 8=Claim Returned, 9=Claim Never Had, 10=Missing, 11=Withdrawn, 16=Unavailable, 20=Does Not Circulate, 21=Claim Missing Parts, **it is recommended that you enable the Polaris feature to RETAIN deleted item records**. The SQL script will also look for deleted item record statuses and using deleted item records means you don't have to be as careful with your timing remembering to run the script while items are in a Withdrawn status before deleting the record entirely.
+7.  Although the SQL scripts will delete holdings if all item records are in these statuses: 7=Lost, 8=Claim Returned, 9=Claim Never Had, 10=Missing, 11=Withdrawn, 16=Unavailable, 20=Does Not Circulate, 21=Claim Missing Parts, **it is recommended that you enable the Polaris feature to RETAIN deleted item records**. The SQL script will also look for deleted item record statuses and using deleted item records means you don't have to be as careful with your timing remembering to run the script while items are in a Withdrawn status before deleting the record entirely.
 
 ## Configuration
 
