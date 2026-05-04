@@ -62,11 +62,7 @@ param (
 
     # Switch to enable logging of generated SQL queries. If not present, this is skipped.
     [Parameter(Mandatory = $false)]
-    [switch]$EnableSqlLogging,
-
-    # Switch to enable logging of raw data returned from SQL queries. If not present, this is skipped.
-    [Parameter(Mandatory = $false)]
-    [switch]$EnableRawSqlDataLogging
+    [switch]$EnableSqlLogging
 )
 
 # --- Path Initializations ---
@@ -434,7 +430,6 @@ $scriptParameters = @{
     OutputPath                  = $OutputPath
     EnableSftpUpload            = $EnableSftpUpload
     EnableSqlLogging            = $EnableSqlLogging
-    EnableRawSqlDataLogging     = $EnableRawSqlDataLogging
     SftpGlobalHostname          = $SftpGlobalHostname
     SftpGlobalHostKeyFingerprint= $SftpGlobalHostKeyFingerprint
 }
